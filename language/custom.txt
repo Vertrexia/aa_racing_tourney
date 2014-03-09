@@ -1,0 +1,243 @@
+language Alpha Project: Racing
+include english_base.txt
+
+###############################################
+#                                             #
+#            GameState Messages               #
+#                                             #
+###############################################
+
+gamestate_deleting_objects           0x80a0ffDeleting objects...\n
+gamestate_deleting_grid               0x80a0ffDeleting grid...\n
+gamestate_creating_grid               0x80a0ffCreating grid...\n
+gamestate_done                       0x80a0ffdone!\n
+gamestate_timeout_intro               0x80a0ff\n\nTimeout! Reason:\n
+gamestate_timeout_message           0x80a0ffUser \1 does not know about netobject \2 ( \3 ).\n
+
+gamestate_reset_center               0x80a0ffNew Match Starting!
+gamestate_reset_console               0x80a0ffScores resetted for new match next roun!\n
+gamestate_resetnow_center           0x80a0ffNew Match Starting!
+gamestate_resetnow_console           0x80a0ffResetting scores...\n
+gamestate_resetnow_log               0x80a0ffNew Match Starting!\n
+gamestate_newround_console           0x80a0ffGo (round \1 of \2)!\n
+gamestate_newround_goldengoal       0x80a0ffGo (extra round; whoever gains the lead wins)!\n
+gamestate_newround_log               0x80a0ffNew Round Starting!\n
+gamestate_chat_wait                0xff15ffWaiting for \1 to finish typing in \2 seconds.\n
+
+gamestate_wait_players                0xf9900cPlayers Required...\n
+gamestate_wait_players_con            0xf9900cPlayers Required (0x0990ffAnthropoids Online0xf9900c)...\n
+
+gamestate_tensecond_warn           0xff7777Ten seconds left!\n
+gamestate_30seconds_warn           0xff500030 seconds left!\n
+gamestate_minute_warn               0xff00ffOne minute left!\n
+gamestate_2minutes_warn               0x00ff00Two minutes left!\n
+gamestate_5minutes_warn               0x9900ffFive minutes left!\n
+gamestate_10minutes_warn           0x9999ffTen minutes left!\n
+
+gamestate_set_start_center         New Set
+gamestate_set_start_console         Starting Set \1!\n
+gamestate_set_center                 Set \1 Winner: \2
+gamestate_set_console                 Set \1 Winner: \2
+gamestate_set_scores                 Set \1 Scores:\n
+
+gamestate_reset_challenge        Start Challenge Best of \1 Next Round !
+
+gamestate_champ_center               0x00ff00Overall Match Winner Is: \1 
+gamestate_champ_console               0x00ff00Overall Winner Is: \1 
+gamestate_champ_scorehit           0x00ff00with \1 points.\n
+gamestate_champ_timehit               0x00ff00after the time limit of \1 minutes was hit.\n
+gamestate_champ_default               0x00ff00after \1 rounds.\n
+gamestate_champ_finalscores         0x00ff0The End Scores:\n
+
+gamestate_winner_winner               Final Winner:
+gamestate_winner_ai                   AI.
+gamestate_winner_humans               Humaoids.
+
+instant_win_activated                 0x00ff00Instant win zone activated! Enter it to win the round.\n
+instant_round_end_activated         0x00ffffRound end zone activated! Enter it to end the round.\n
+instant_death_activated               0xff0000Death zone activated! Avoid it!\n
+
+player_admin_kill
+player_admin_slap_free                0x77aaccAn administrator punched 0xff7700\1 0x77aaccin the face.\n
+player_admin_slap_win                 0x77aaccAn administrator patted 0xff7700\1 0x77aaccwith 0xff5555\2 0x77aaccpoints.\n
+player_admin_slap_lose                0x77aaccAn administrator sucked in 0xff5555\2 0x77aaccpoints from 0xff7700\1!\n
+slap_help                          Slaps the given player by penalizing him with the specified amount of oints. Be smart and you may be able to hug your users, too ;)
+player_win_instant                   0x77ff22Instant Win Zone awarded \1 0x77ff22\2 points for entering! Good work!\n
+player_win_conquest                   0x77ff22The enemy base has collapsed, \1 0x77ff22was awarded \2 points! Good Show!\n
+player_win_conquest2                 0x77ff22The \3's base has collapsed, \1 0x77ff22was awarded \2 points! Nice work!\n
+players_win_conquest                 0x77ff22The \3's base had collapsed, \1 0x77ff220was awarded \2 points! Wonderful!\n
+player_win_flag                         0x77ff22For capturing enemies' flag, \1 0x77ff22was awarded \2 points! Good work!\n
+player_win_held_fortress           0x77ff22For Protecting the base, \1 0x77ff22was awarded \2 points! Excellent!\n
+player_lose_held_fortress           0x77ff22Beeing too defensive had cost \1 0x77ff22\2 points! Be carefull!\n
+player_win_conquest_specific     0x77ff22For conquering \3's base, \1 0x77ff22was awarded \2 points! Nice Show!\n
+player_kill_collapse             0x77ff22\1 0x77ff22was wiped out because its zone vanished! Too bad!\n
+player_win_hole                  \1 got \2 points for a sacrifice for the good of the team.\n
+player_lose_hole                 0xffff00ZOMG! 0xff7f00HOLER!!1!!0xRESETT \1 lost \2 points for being a cheap ass lamer.\n
+
+player_no_longer_suspended       \1 0x77ff77is allowed to play again. Lucky!\n
+player_suspended                 \1 0xff7777is busted to watch the world for \2 round(s). Haha!\n
+
+zone_collapse_harmless           \1's zone collapses harmlessly for lack of enemy contacts.\n
+
+###############################################
+#                                             #
+#          Player Activity Messages           #
+#                                             #
+###############################################
+
+player_teamleave_disallowed             Sorry, does not work with automatic team assignment.\n
+player_teamchanges_disallowed             Sorry, the administrator disabled team changes.\n
+player_teamchanges_suspended             Sorry, you are still suspended from playing for the next \1 round(s).\n
+player_teamchanges_accesslevel             Sorry, your access level is not high enough to play. You're \1, required would be \2.\n
+player_vote_accesslevel                 Sorry, your access level is not high enough to issue a vote of this type. You're \1, required would be \2.\n
+player_pingcharity_changed                Ping charity changed from \1 to \2.\n
+
+spam_protection_repeat                    0x99578fSPAM BLOCK: 0xff7777you already said: \1\n
+spam_protection                                 0x99578fSPAM BLOCK: 0xff7777you are silenced for the next \1 seconds.\n
+spam_protection_prefix                    0x99578fSPAM BLOCK: 0xff7777your messages have a common prefix: \1\n0x99578fSPAM BLOCK: 0xff7777messages with this prefix will be allowed again in \2 seconds\n
+spam_protection_silenceall                0x99578fSPAM BLOCK: 0xff7777public chat is disabled.\n
+spam_protection_silenced                  0x99578fSPAM BLOCK: 0xff7777you have been silenced by the server administrator.\n
+spam_protection_silenced_default 0x99578fSPAM BLOCK: 0xff7777you have to be given voice in order to chat publicly.\n
+
+player_silenced                            \1 0xff7777is silenced.\n
+player_voiced                              \1 0x77ff77can talk again.\n
+player_allowed_teamchange                  \1 0x77ff77can change teams.\n
+player_disallowed_teamchange               \1 0xff7777cannot change teams.\n
+
+player_entered_game                     \1 0x96a0d4is now going to play. 0xb4e067[ 0xff6622Hi! 0xb4e067]\n
+player_entered_spectator             \1 0x96a0d4will watch others play. 0xb4e067[ 0xff6622Helli! 0xb4e067]\n
+player_left_spectator                \1 0x96a0d4got bored and left. 0xb4e067[ 0xff6622Bye! 0xb4e067]\n
+player_left_game                        \1 0x96a0d4was discarded with \2 points.\n
+player_leaving_game                     \1 0x96a0d4has given up playing. 0xb4e067[ 0xff6622Cya Later! 0xb4e067]\n
+
+invite_no_team                      0x9900ffCan't use \1 if you're not on a team.\n
+invite_team_locked                  \1 0xff0000is locked. You'll need an invitation from a team leader to join.\n
+invite_team_unlocked                \1 0x00ff00is unlocked. Now you can join the team freely.\n
+unlock_all_teams_help               Unlocks all teams.
+invite_team_can_join          \10xRESETT can now join \2.\n
+invite_team_invite                  \10xRESETT has been invited to join \2.\n
+invite_team_kick                    \10xRESETT has been kicked from \2.\n
+invite_team_uninvite                \10xRESETT got his invitation to join \2 cancelled.\n
+invite_team_locked_list             (locked)
+
+msg_toomanymatches                         0xff5550Many players were found from searching for \1. Be more specific.\n
+msg_nomatch                                   0xff5550No players were found containing \1.\n
+
+player_toggle_spectator_on              0xff5000\1 switches to spectator mode and will stop playing the next round.\n
+player_toggle_spectator_off             0xff0050\1 leaves spectator mode and enters the game again.\n
+
+#camera messages
+camera_watching_ai                0x9999ffGhosting AI Player\n
+camera_watching_player                0x9999ffGhosting \1\n
+
+#score table
+team_scoretable_name                      0x00ffffTeam:
+team_scoretable_score                      0x00ffffScore:
+player_scoretable_name                      0x00ffffPlayer:
+player_scoretable_team                      0x00ffffMember of Team:
+player_scoretable_score                      0x00ffffScore:
+player_scoretable_ping                      0x00ffffPing:
+player_scoretable_alive                      0x00ffffAlive:
+player_scoretable_alive_yes                  0x00ff00Yes
+player_scoretable_alive_no                  0xff0000No
+player_scoretable_pingcharity             0xffff00Ping Charity:
+player_scoretable_nobody                  Nobody there.\n
+player_scoretable_inactive                  Disconnected
+
+network_statistics1                       
+network_statistics2                       
+network_statistics3                       
+
+###############################################
+#                                             #
+#               Voting Messages               #
+#                                             #
+###############################################
+
+vote_accepted              0x9950ffPoll "\1" has been 0xff0000accepted. 0xff5000Unlucky!\n
+vote_rejected              0x9950ffPoll "\1" has been 0x00ff00rejected. 0xff5000Lucky!\n
+vote_timeout              0x9950ffPoll "\1" timed out.\n
+vote_cancel_all           0x00ff00All polls have been canceled by an administrator.\n
+vote_new                  0x0099ffNew poll: "\1". Enter the main menu to vote on it.\n
+vote_redundant            0x99ff99Poll rejected, same suggestion was made already recently.\n
+vote_maturity             0x99ff99Poll rejected, you're not old enough to issue votes, wait \1 seconds.\n
+vote_overflow              0x99ff99Poll rejected, too many pending polls.\n
+vote_disabled              0x99ff99Poll rejected, disabled by server admin.\n
+vote_disabled_spectator      0x99ff99Poll/Vote rejected, disabled for spectators by server admin.\n
+vote_toofew                  0x99ff99Poll rejected, too few possible voters online.\n
+vote_submitted              0xff00ffPoll "\2" submitted by \1.\n
+vote_vote_for              0x9950ff\1 voted to accept Poll "\2".\n
+vote_vote_against          0x9950ff\1 voted to reject Poll "\2".\n
+vote_unknown_command      0x9950ffUnknown /vote command \1, available are: \2\n
+vote_kick_local           0x9950ffCan't vote against local player/AI \1.\n
+
+###############################################
+#                                             #
+#            Access Level Names               #
+#                                             #
+###############################################
+
+config_accesslevel_0        0xff98f0Overlord0xRESETT
+config_accesslevel_1        0x82438fOfficer0xRESETT
+config_accesslevel_2        0xf73473Support0xRESETT
+config_accesslevel_3        0xffdd00Diplomat0xRESETT
+config_accesslevel_4        0xf05f00Craftman0xRESETT
+
+config_accesslevel_15        0xff00ffRemote Player0xRESETT
+config_accesslevel_21       0x8223bfPunished0xRESETT
+
+login_message_special        \40x0fafff\1 0x7fe66bis now \3 0xRESETT( 0xf0f00c\2 0xRESETT)\n
+logout_message                0x0fafff\1 0xf090ffhas resigned.\n
+
+###############################################
+#                                             #
+#               Queueing Commands             #
+#                                             #
+###############################################
+
+map_queueing_stored_file_found        0x99cc99Map 0x00a7f9\1 0x99cc99already exists in the queue(0xaa99f0\20x99cc99).\n
+map_queueing_file_stored              0x4488ff\2 0x44ff88queued 0xff8844\1.\n
+map_queueing_file_removed             0x4488ff\2 0xff6000unqueued 0xcccc22\1.\n
+map_queueing_is_empty                 0x99cc99Map Queue is now empty! 0x00a7ffMap rotation will resume from next trigger.\n
+
+config_queueing_stored_file_found     0x99cc99Config 0x00a7f9\1 0x99cc99already exists in the queue(0xaa99f0\20x99cc99). This has been ignored.\n
+config_queueing_file_stored           \2 0x88ff22queued 0x00ffff\1.\n
+config_queueing_file_removed          \2 0xffdd00unqueued 0x88ff22\1.\n
+config_queueing_is_empty              0x99cc99Config Queue is not empty! 0x00a7ffResuming config rotation from the next possible trigger.\n
+
+queue_limit_reached                   0x0099bbQueue Limit Reached, 0xaa5599Next refill in 0x99aaff\1 seconds0xaa5599.\n
+queue_refill_waiting                  0x0099bbQueue Waiting: 0xaa9900\1 0x55aa00seconds.\n
+queue_refill_success                  0x0099bbQueue Refill: 0xaa88cc\1\n
+queue_give_success                    0x0099bbQueue Set: 0xaa88cc\1 0x0099bb... 0xbb9999\2 qs\n
+
+###############################################
+#                                             #
+#               Racing Message                #
+#                                             #
+###############################################
+
+
+race_ranks_loading                   0xff9999Loading Racing Ranks for 0x9999ff\1.\n
+race_ranks_saving                    0xff9999Saving Racing Ranks for 0x9999ff\1.\n
+
+race_rank_title_message              0xff8888Top \1 players for 0xffdd00\2\n
+race_rank_title_name                 0x88ff22Rank
+race_rank_title_player_name          0x88ff22Player
+race_rank_title_time_name            0x88ff22Time
+race_rank_border                     0xaa0099#0x7799ff
+
+player_win_race                             \1 0xff55aawon the race and received 0x00cccc\2 points0x0099ff.\n
+
+player_reach_race                         \1 0x92aba0finished with \2 0x92aba0points in \3 seconds.\n
+player_reach_race_first              0xff770010x55aa00| 0x9955ff\1 0xffff44finished in 0x88ff33\2 seconds0xffff44.\n
+player_reach_race_time               0xff7700\20x55aa00| 0x9955ff\1 0xffff44finished in 0x88ff33\3 seconds 0x92aba0(0x00aa11\4 0xffaa00seconds behind 0xff77ff\5 0x92aba0).\n
+
+player_personal_best_reach_time      0xff3300*0x00ffff*0x00ff00*0xffff00* 0x00aaffNew personal record! Your new record is 0xff00ff\1 0x00aaffseconds 0xff3300*0x00ffff*0x00ff00*0xffff00*\n
+player_message_race_rank             0x00ffffYou are no. 0xaa00ff\1 0x00ffffon the ladder with a time record of 0xaaff00\2 0x00ffffseconds.\n
+player_race_record_search_found      0x9999ff\1 0xaaffffis ranked 0x00ff00\2 0xaaffffwith a best time of 0xffaaaa\3 0xaaffffseconds.\n
+
+race_player_hold_best_time           0xffff00*0x88ff22*0x0099ff*0xff3300* 0xff88ccCongratulations 0x99ccff\10xff88cc! You now hold the best time for 0x00ffff\30xffdd00! 0xff3300*0x0099ff*0x88ff22*0xffff00*\n
+race_player_hold_slow_time           0xaaff99\1 0xff55fffinished 0x00ffff\3 seconds 0xffff00slower 0xff55ffand remained at rank 0xff9955\40x7799ff.\n
+race_player_hold_same_rank           0xaaff99\1 0xff55fffinished 0x00ffff\3 seconds 0x88ff33faster 0xff55ffbut remained at rank 0xff9955\40x7799ff.\n
+race_player_hold_rank_up             0xaaff99\1 0xff55fffinished 0x00ffff\3 seconds 0x88ff33faster 0xff55ffand rose to rank 0xff9955\40x7799ff.\n
+race_player_hold_new_time            0xaaff99\1 0xff55fffinished in 0x00ffff\2 seconds 0xff55ffand is placed at rank 0xff9955\30x7799ff.\n
