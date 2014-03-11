@@ -4,8 +4,9 @@ $map    = "";   //  name of the current map
 $map_id = "";   //  the hash format of the current map + .txt
 $game_time = 0; //  the current game time
 
-$race_work = false; //  flag to get the race going
-$race_done = false; //  the race is finally complete
+$race_work     = false; //  flag to get the race going
+$race_launched = false; //  flag for race launched or not
+$race_done     = false; //  flag for when race is complete
 
 $first = true;      //  flag to indicate first player entered
 $first_player = ""; //  the name of the first player
@@ -60,7 +61,7 @@ while (!feof(STDIN))
          * Your_mom/clever/ctfsty-0.0.2.aamap.xml(http://maps.ix.ihptru.net/Your_mom/clever/ctfsty-0.0.2.aamap.xml)
          * The only needed information is the actual MAP_FILE: Your_mom/clever/ctfsty-0.0.2.aamap.xml
          */
-        if ($pos = strpos($map, "(") !== false)
+        if (false !== ($pos = strpos($map, "(")))
             $map = substr($map, 0, $pos);
 
         $map_id = md5($map.".txt");
@@ -267,6 +268,7 @@ while (!feof(STDIN))
 
                 $race_work = true;
                 $race_done = false;
+                $race_launched = true;
                 con("0x8811ff> 0xRESETTThe race will begin from next match.");
             }
             //  Let's stop the race if it isn't done
@@ -286,6 +288,7 @@ while (!feof(STDIN))
 
                 $race_work = false;
                 $race_done = false;
+                $race_launched = false;
                 con("0x8811ff> 0xRESETTThe race will now stop.");
             }
             //  Let's reset the race for fresh start
@@ -312,6 +315,7 @@ while (!feof(STDIN))
 
                 $race_work = false;
                 $race_done = false;
+                $race_launched = false;
 
                 $first = true;
                 $rank = 0;
@@ -327,16 +331,16 @@ while (!feof(STDIN))
 
                 //  remove all the possible files created in the data directory
                 $files = scandir("./data");
-                if (count($files) > 0)
+                if (($files !== false) && (count($files) > 0))
                 {
-                    for($f_id = 0; $f_id < count($files); $$f_id++)
+                    for($f_id = 0; $f_id < count($files); $f_id++)
                     {
                         if (is_file("./data/".$files[$f_id]))
                             unlink("./data/".$files[$f_id]);
                     }
                 }
 
-                con("0x8811ff> 0xRESETTThe race is now reset.");
+                con("0x8811ff> 0xRESETTThe race is now reset for a fresh start.");
             }
         }
         else pm($part[2], 'You do not have the required access level to access "'.$part[1].'"');
@@ -384,12 +388,15 @@ while (!feof(STDIN))
     //  NEW_MATCH <date and time>
     elseif ($part[0] == "NEW_MATCH")
     {
-        if ($race_work)
+        //  ensure the race is finished and not when it is launched
+        if ($race_work && !$race_launched)
         {
             $race_work = false;
             $race_done = true;
             con("0x8811ff> 0xRESETTThe race has finally come to an end.");
         }
+
+        $race_launched = false; //  clear the race launch flag
     }
     //  ROUND_FINISHED [time]
     if ($part[0] == "ROUND_FINISHED")

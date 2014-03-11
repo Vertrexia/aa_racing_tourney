@@ -26,7 +26,7 @@
       <file leaf-file-name="script.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="185" column="54" selection-start="6883" selection-end="6883" vertical-scroll-proportion="0.44230768" vertical-offset="2754" max-vertical-offset="7871">
+            <state line="57" column="0" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.5769231" vertical-offset="459" max-vertical-offset="8007">
               <folding />
             </state>
           </provider>
@@ -102,20 +102,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aa_racing_tourney" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aa_racing_tourney" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -125,7 +111,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistory" value="" />
-    <property name="options.lastSelected" value="preferences.sourceCode.PHP" />
+    <property name="options.lastSelected" value="File.Encoding" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -195,11 +181,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -221,6 +207,55 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="397" column="0" selection-start="14291" selection-end="14291" vertical-scroll-proportion="0.0" vertical-offset="6307" max-vertical-offset="8007">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="332" column="30" selection-start="12194" selection-end="12194" vertical-scroll-proportion="0.0" vertical-offset="5219" max-vertical-offset="8007">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="426" column="1" selection-start="15408" selection-end="15408" vertical-scroll-proportion="0.0" vertical-offset="7004" max-vertical-offset="7888">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="426" column="1" selection-start="15408" selection-end="15408" vertical-scroll-proportion="0.0" vertical-offset="6698" max-vertical-offset="7888">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="427" column="0" selection-start="15409" selection-end="15409" vertical-scroll-proportion="0.0" vertical-offset="6987" max-vertical-offset="7888">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="165" column="0" selection-start="6214" selection-end="6214" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="7871">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="185" column="54" selection-start="6883" selection-end="6883" vertical-scroll-proportion="0.0" vertical-offset="2754" max-vertical-offset="7871">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="207" column="0" selection-start="7671" selection-end="7671" vertical-scroll-proportion="0.0" vertical-offset="2754" max-vertical-offset="7871">
@@ -394,11 +429,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/language/custom.txt">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="17" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.42967033" vertical-offset="612" max-vertical-offset="4216" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_9.php">
@@ -412,11 +447,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/racing.cfg">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="85" column="1" selection-start="3624" selection-end="3624" vertical-scroll-proportion="0.82197803" vertical-offset="697" max-vertical-offset="10285" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/ladderlog.cfg">
@@ -424,9 +459,16 @@
         <state line="81" column="48" selection-start="9508" selection-end="9508" vertical-scroll-proportion="0.6725275" vertical-offset="765" max-vertical-offset="2057" />
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_7.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="374" column="3" selection-start="11345" selection-end="11345" vertical-scroll-proportion="0.38015607" vertical-offset="6017" max-vertical-offset="18989">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="185" column="54" selection-start="6883" selection-end="6883" vertical-scroll-proportion="0.44230768" vertical-offset="2754" max-vertical-offset="7871">
+        <state line="57" column="0" selection-start="2149" selection-end="2149" vertical-scroll-proportion="0.5769231" vertical-offset="459" max-vertical-offset="8007">
           <folding />
         </state>
       </provider>
