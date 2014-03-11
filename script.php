@@ -1,10 +1,11 @@
 #!/usr/bin/php
 <?php
-$map    = "";          //  name of the current map
-$map_id = "";          //  the hash format of the current map + .txt
+$map    = "";   //  name of the current map
+$map_id = "";   //  the hash format of the current map + .txt
+$game_time = 0; //  the current game time
+
 $race_work = false; //  flag to get the race going
 $race_done = false; //  the race is finally complete
-$game_time = 0;     //  the current game time
 
 $first = true;      //  flag to indicate first player entered
 $first_player = ""; //  the name of the first player
@@ -19,8 +20,8 @@ $idle_speed = 25;   //  idle speed of players
 $idle_delay = 5;    //  the delay between idle kill activation
 $idle_warnings = 1; //  number of warnings to send to player about their idle status
 
-$records = array(); //  records holder by map and the order in which the players entered
-$cycles  = array(); //  list of cycles active on the grid
+$records = array();  //  records holder by map and the order in which the players entered
+$cycles  = array();  //  list of cycles active on the grid
 
 while (!feof(STDIN))
 {
@@ -30,8 +31,23 @@ while (!feof(STDIN))
     //  no need to process script when the line has useless information
     if ((count($part) == 0) || (count($part) == 1)) continue;
 
+    //  ROUND_STARTED [time]
+    if ($part[0] == "ROUND_STARTED")
+    {
+        if (isset($records[$map_id]))
+        {
+            for($a = 0; $a < 3; $a++)
+            {
+                if (isset($records[$map_id][$a]))
+                {
+                    con("0x00ffff".($a + 1)."0xRESETT) 0xff5555".$records[$map_id][$a][1]." 0xffff7f- 0x88ff22".$records[$map_id][$a][0]);
+                    usleep(200000);
+                }
+            }
+        }
+    }
     //  CURRENT_MAP [factor] [multiplier] [MAP_FILE]
-    if ($part[0] == "CURRENT_MAP")
+    elseif ($part[0] == "CURRENT_MAP")
     {
         //  very handy to clear ladderlog since it does get big in a round
         echo "CLEAR_LADDERLOG\n";
@@ -59,6 +75,9 @@ while (!feof(STDIN))
             $file = fopen("./data/".$map_id.".txt", "w+");
             ftruncate($file, 0);
             fclose($file);
+
+            $map_ext = explode("-", basename($map));
+            con("0x8811ff> 0xRESETTLoaded map: 0x00ccff".$map_ext[0]);
         }
 
         $first = true;
@@ -108,7 +127,7 @@ while (!feof(STDIN))
                 if ($cycles[$p_id][3] < $idle_warnings)
                 {
                     //  send the warnings and count it up
-                    pm($part[2], "0xff9999Idle Warning: 0xRESETTHold down your brake button (v) key to go faster.");
+                    pm($part[2], "0x8811ff> 0xff9999Idle Warning: 0xRESETTHold down your brake button (v) key to go faster.");
                     $cycles[$p_id][2] = $game_time + $idle_delay;
                     $cycles[$p_id][3] += 1;
                     continue;
@@ -118,7 +137,7 @@ while (!feof(STDIN))
                 if ($cycles[$p_id][1])
                 {
                     echo "KILL ".$part[1]."\n";
-                    con("0xff55ff".$part[1]." 0xff9999is killed for idling around!");
+                    con("0x8811ff> 0xRESETT".$part[1]." is killed for idling around!");
                     unset($cycles[$p_id]);
                 }
                 else
@@ -166,8 +185,7 @@ while (!feof(STDIN))
 
         //  kill the user since they finished the race
         echo "KILL ".$user."\n";
-        if (isset($cycles[$p_id]))
-            unset($cycles[$p_id]);
+        unset($cycles[$p_id]);
 
         //  increase the rank of entry. Default: 0. So increase by 1 each time.
         $rank++;
@@ -193,12 +211,16 @@ while (!feof(STDIN))
         {
             //  if their current time is better than their first race
             if ($records[$map_id][$found_id][1] < $time)
+            {
                 //  tell the player how much faster they were
-                pm($user, " 0x00ccffiYou are ".($time - $records[$map_id][$found_id][1])."s faster from your first race.");
+                pm($user, " 0x00ccffYou are ".($time - $records[$map_id][$found_id][1])."s faster from your first race.");
+            }
             //  if their current time is worse than their first race
             elseif ($records[$map_id][$found_id][1] > $time)
+            {
                 //  tell the player how much slower they were
-                pm($user, " 0x00ccffiYou are ".($time - $records[$map_id][$found_id][1])."s slower from your first race.");
+                pm($user, " 0x00ccffYou are ".($time - $records[$map_id][$found_id][1])."s slower from your first race.");
+            }
         }
         else
         {
@@ -206,13 +228,18 @@ while (!feof(STDIN))
             if (!isset($records[$map_id]))
                 $records[$map_id] = array();
 
-            //  add the player's user and time into the map record (finished based)
+            //  add the player's user and time into the map record (finish based)
             $records[$map_id][] = array($user, $time);
 
-            //  if the race is working and not done yet, append their name and time in the file
+            //  if the race is working and not done yet, append their name and time to the file
             if ($race_work && !$race_done)
+            {
                 file_put_contents("./data/".$map_id.".txt", $user." ".$time."\n", FILE_APPEND);
+            }
         }
+
+        //  sort the ranks by their times (shortest to longest)
+        sort($records[$map_id], SORT_NUMERIC);
     }
     //  INVALID_COMMAND [command] [player_username] [ip_address] [access_level] [params] ...
     elseif ($part[0] == "INVALID_COMMAND")
@@ -236,10 +263,11 @@ while (!feof(STDIN))
 
                 echo "START_NEW_MATCH\n";
                 echo "KILL_ALL\n";
+                echo "COLLAPSE_ALL\n";
 
                 $race_work = true;
                 $race_done = false;
-                con("The race will begin from next match.");
+                con("0x8811ff> 0xRESETTThe race will begin from next match.");
             }
             //  Let's stop the race if it isn't done
             elseif ($part[1] == "/stop")
@@ -258,7 +286,7 @@ while (!feof(STDIN))
 
                 $race_work = false;
                 $race_done = false;
-                con("The race will now stop.");
+                con("0x8811ff> 0xRESETTThe race will now stop.");
             }
             //  Let's reset the race for fresh start
             elseif ($part[1] == "/reset")
@@ -308,10 +336,10 @@ while (!feof(STDIN))
                     }
                 }
 
-                con("The race is now reset.");
+                con("0x8811ff> 0xRESETTThe race is now reset.");
             }
         }
-        else pm($part[2], 'You don not have the required access level to access "'.$part[1].'"');
+        else pm($part[2], 'You do not have the required access level to access "'.$part[1].'"');
     }
     //  ONLINE_PLAYERS_COUNT <humans> <ais> <humans alive> <ai alive>
     elseif ($part[0] == "ONLINE_PLAYERS_COUNT")
@@ -323,10 +351,14 @@ while (!feof(STDIN))
 
         //  if only one human is alive, then activate the timer
         if (($humans_alive == 1) && !$timer_active)
+        {
             $timer_active = true;
+        }
         //  if all humans are dead, deactivate the timer
         elseif (($humans_alive == 0) && $timer_active)
+        {
             $timer_active = false;
+        }
     }
     //  GAME_TIME <time> (see also: GAME_TIME_INTERVAL)
     elseif ($part[0] == "GAME_TIME")
@@ -345,6 +377,7 @@ while (!feof(STDIN))
             {
                 $timer_active = false;
                 echo "KILL_ALL\n";
+                echo "COLLAPSE_ALL\n";
             }
         }
     }
@@ -355,7 +388,40 @@ while (!feof(STDIN))
         {
             $race_work = false;
             $race_done = true;
-            con("The race has finally come to an end.");
+            con("0x8811ff> 0xRESETTThe race has finally come to an end.");
+        }
+    }
+    //  ROUND_FINISHED [time]
+    if ($part[0] == "ROUND_FINISHED")
+    {
+        if (isset($records[$map_id]))
+        {
+            for($a = 0; $a < 3; $a++)
+            {
+                if (isset($records[$map_id][$a]))
+                {
+                    $prev_index = $a - 1;
+                    $next_index = $a + 1;
+
+                    //  show the previous rank (if it exists)
+                    if (isset($records[$map_id][$prev_index]))
+                    {
+                        pm($records[$map_id][$a][0], "0x8800ff".($prev_index + 1)."0xRESETT) 0xff5555".$records[$map_id][$prev_index][1]." 0xffff7f- 0x88ff22".$records[$map_id][$prev_index][0]);
+                        usleep(200000);
+                    }
+
+                    //  show the current rank
+                    pm($records[$map_id][$a][0], "0x00ffff".($a + 1)."0xRESETT) 0xff44ff".$records[$map_id][$a][1]." 0xffff7f- 0xffdd00".$records[$map_id][$a][0]);
+                    usleep(200000);
+
+                    //  show the next rank (if it exists)
+                    if (isset($records[$map_id][$next_index]))
+                    {
+                        pm($records[$map_id][$a][0], "0x8800ff".($next_index + 1)."0xRESETT) 0xff5555".$records[$map_id][$next_index][1]." 0xffff7f- 0x88ff22".$records[$map_id][$next_index][0]);
+                        usleep(200000);
+                    }
+                }
+            }
         }
     }
 }
