@@ -5,7 +5,6 @@ $map_id = "";   //  the hash format of the current map + .txt
 $game_time = 0; //  the current game time
 
 $race_work     = false; //  flag to get the race going
-$race_launched = false; //  flag for race launched or not
 $race_done     = false; //  flag for when race is complete
 
 $first = true;      //  flag to indicate first player entered
@@ -24,6 +23,11 @@ $idle_warnings = 1; //  number of warnings to send to player about their idle st
 $records = array();  //  records holder by map and the order in which the players entered
 $cycles  = array();  //  list of cycles active on the grid
 
+$humans       = 0;
+$ais          = 0;
+$humans_alive = 0;
+$ais_alive    = 0;
+
 while (!feof(STDIN))
 {
     $line = rtrim(fgets(STDIN, 1024));
@@ -41,7 +45,7 @@ while (!feof(STDIN))
             {
                 if (isset($records[$map_id][$a]))
                 {
-                    con("0x00ffff".($a + 1)."0xRESETT) 0xff5555".$records[$map_id][$a][1]." 0xffff7f- 0x88ff22".$records[$map_id][$a][0]);
+                    con("0xff8800".($a + 1)."0xRESETT) 0x0099ff".$records[$map_id][$a][1]." 0xffff7f- 0x88ff22".$records[$map_id][$a][0]);
                     usleep(200000);
                 }
             }
@@ -240,7 +244,7 @@ while (!feof(STDIN))
         }
 
         //  sort the ranks by their times (shortest to longest)
-        sort($records[$map_id], SORT_NUMERIC);
+        sort($records[$map_id]);
     }
     //  INVALID_COMMAND [command] [player_username] [ip_address] [access_level] [params] ...
     elseif ($part[0] == "INVALID_COMMAND")
@@ -265,10 +269,10 @@ while (!feof(STDIN))
                 echo "START_NEW_MATCH\n";
                 echo "KILL_ALL\n";
                 echo "COLLAPSE_ALL\n";
+                echo "RESET_ROTATION\n";
 
                 $race_work = true;
                 $race_done = false;
-                $race_launched = true;
                 con("0x8811ff> 0xRESETTThe race will begin from next match.");
             }
             //  Let's stop the race if it isn't done
@@ -288,8 +292,26 @@ while (!feof(STDIN))
 
                 $race_work = false;
                 $race_done = false;
-                $race_launched = false;
                 con("0x8811ff> 0xRESETTThe race will now stop.");
+            }
+            //  Let's end the race so it's done
+            elseif ($part[1] == "/end")
+            {
+                if ($race_done)
+                {
+                    pm($part[2], "Can't end the race when it's done.");
+                    continue;
+                }
+
+                if (!$race_work)
+                {
+                    pm($part[2], "The race is inactive to end it.");
+                    continue;
+                }
+
+                $race_work = false;
+                $race_done = true;
+                con("0x8811ff> 0xRESETTThe race is now done.");
             }
             //  Let's reset the race for fresh start
             elseif ($part[1] == "/reset")
@@ -315,7 +337,6 @@ while (!feof(STDIN))
 
                 $race_work = false;
                 $race_done = false;
-                $race_launched = false;
 
                 $first = true;
                 $rank = 0;
@@ -345,23 +366,26 @@ while (!feof(STDIN))
         }
         else pm($part[2], 'You do not have the required access level to access "'.$part[1].'"');
     }
-    //  ONLINE_PLAYERS_COUNT <humans> <ais> <humans alive> <ai alive>
+    //  ONLINE_PLAYERS_COUNT <humans> <ais> <humans alive> <ai alive> <humans dead> <ai dead>
     elseif ($part[0] == "ONLINE_PLAYERS_COUNT")
     {
         $humans       = intval($part[1]);
         $ais          = intval($part[2]);
         $humans_alive = intval($part[3]);
         $ais_alive    = intval($part[4]);
+        $humans_dead  = intval($part[5]);
+        $ais_dead     = intval($part[6]);
 
         //  if only one human is alive, then activate the timer
-        if (($humans_alive == 1) && !$timer_active)
+        if (($humans_alive == 1) && ($humans_dead > 0) && !$timer_active)
         {
             $timer_active = true;
         }
-        //  if all humans are dead, deactivate the timer
-        elseif (($humans_alive == 0) && $timer_active)
+        //  if all humans are dead, deactivate the timer and collapse all zones
+        elseif ($humans_alive == 0)
         {
             $timer_active = false;
+            echo "COLLAPSE_ALL\n";
         }
     }
     //  GAME_TIME <time> (see also: GAME_TIME_INTERVAL)
@@ -384,19 +408,6 @@ while (!feof(STDIN))
                 echo "COLLAPSE_ALL\n";
             }
         }
-    }
-    //  NEW_MATCH <date and time>
-    elseif ($part[0] == "NEW_MATCH")
-    {
-        //  ensure the race is finished and not when it is launched
-        if ($race_work && !$race_launched)
-        {
-            $race_work = false;
-            $race_done = true;
-            con("0x8811ff> 0xRESETTThe race has finally come to an end.");
-        }
-
-        $race_launched = false; //  clear the race launch flag
     }
     //  ROUND_FINISHED [time]
     if ($part[0] == "ROUND_FINISHED")
