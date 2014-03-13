@@ -366,6 +366,15 @@ while (!feof(STDIN))
         }
         else pm($part[2], 'You do not have the required access level to access "'.$part[1].'"');
     }
+    //  ROUND_COMMENCING [current_round] [total_rounds]
+    elseif ($part[0] == "ROUND_COMMENCING")
+    {
+        echo "ROUND_WAIT 1\n";
+
+        echo "WAIT_FOR_EXTERNAL_SCRIPT 0\n";
+        sleep(1);
+        echo "WAIT_FOR_EXTERNAL_SCRIPT 1\n";
+    }
     //  ONLINE_PLAYERS_COUNT <humans> <ais> <humans alive> <ai alive> <humans dead> <ai dead>
     elseif ($part[0] == "ONLINE_PLAYERS_COUNT")
     {
@@ -385,6 +394,7 @@ while (!feof(STDIN))
         elseif ($humans_alive == 0)
         {
             $timer_active = false;
+            echo "ROUND_WAIT 0\n";
             echo "COLLAPSE_ALL\n";
         }
     }
