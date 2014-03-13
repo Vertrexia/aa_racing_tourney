@@ -377,7 +377,7 @@ while (!feof(STDIN))
         $ais_dead     = intval($part[6]);
 
         //  if only one human is alive, then activate the timer
-        if (($humans_alive == 1) && ($humans_dead > 0) && !$timer_active)
+        if (($humans_alive == 1) && ($ais_alive == 0) && ($humans > 1) && !$timer_active)
         {
             $timer_active = true;
         }
