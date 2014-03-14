@@ -1,10 +1,16 @@
 #!/usr/bin/php
 <?php
+$maps = array("Animuson/maps/Nebraska-5.0.2.aamap.xml", "Lover-Boy/racing/Chain_of_Destruction-1.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Zeltrus-1.0.2.aamap.xml", "Lover-Boy/Advanced/Racing/Stereo-1.0.0.aamap.xml", "Blaze/maps/Jester-5.0.1.aamap.xml", "Hoop/maps/Colombo-5.0.4.aamap.xml", "Animuson/maps/A_Quick_Explosion-5.0.0.aamap.xml", "Animuson/maps/Square_Root-5.0.0.aamap.xml", "VOV/maps/Robot-5.0.0.aamap.xml", "Hoop/maps/Mario-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Maletrus-1.0.1.aamap.xml", "Lover-Boy/racing/SwordHandle-1.0.0.aamap.xml", "Lover-Boy/racing/Termitrators-1.0.0.aamap.xml", "VOV/maps/Evil-5.0.0.aamap.xml", "Eristan/maps/Nopo-5.0.0.aamap.xml", "Animuson/maps/Dont_Flinch-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Mini_XYBlaster-1.0.2.aamap.xml", "Lover-Boy/Advanced/Racing/Confusion-0.0.1.aamap.xml", "MrO/maps/Shopping_Mall-5.0.0.aamap.xml", "LoverBoy/maps/Organius-5.0.4.aamap.xml", "Durf/maps/Chica-4.0.2.aamap.xml", "Animuson/maps/Benign_Revolution-5.0.0.aamap.xml", "TestSubject/maps/Pothead-0.2.aamap.xml", "Lover-Boy/Advanced/Racing/Optional_Prism-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Rare_Candy-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Strangler-1.0.1.aamap.xml", "DarkChaos/maps/Three-5.0.1.aamap.xml", "Eristan/maps/English-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Highliter-1.0.2.aamap.xml", "Durf/maps/Tunnels-4.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Triapazointal-0.0.1.aamap.xml", "Smoothice/maps/Insanity-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Long_Nose-1.0.1.aamap.xml", "Slash/maps/Small-5.0.4.aamap.xml", "Animuson/maps/Movin_On_Up-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Cuppas-1.0.2.aamap.xml", "DarkChaos/maps/Six-5.0.0.aamap.xml", "Durf/maps/WhichWay-4.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Maxtram-1.0.1.aamap.xml", "Smart/maps/PentaGone2Death-4.0.1.aamap.xml", "Smart/maps/BigCityNights-5.0.2.aamap.xml", "Hoop/maps/Verta-5.0.5.aamap.xml", "Lover-Boy/Advanced/Racing/Tempest-0.0.1.aamap.xml", "VOV/maps/Mission_Impossible-5.0.1.aamap.xml", "Eristan/maps/ILoveYou-5.1.0.aamap.xml", "PuffyFluff/maps/CandyBar-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Racket-1.0.1.aamap.xml", "Lover-Boy/racing/Nostalgic-1.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Hand_of_Glory-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Heart_Scale-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Glass-0.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Recta_Fire-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Small_Disastor-1.0.1.aamap.xml", "VOV/maps/Insane-5.0.1.aamap.xml", "Blaze/maps/Illusion-5.0.0.aamap.xml", "Soapy/maps/The_Bathtub-5.1.0.aamap.xml", "TestSubject/maps/Unbelieveble-0.2.aamap.xml", "Lover-Boy/Advanced/Racing/Zel_Trex-1.0.1.aamap.xml", "Smoothice/maps/Around_and_Around-5.0.1.aamap.xml", "VOV/maps/Zone_4-5.0.0.aamap.xml", "VOV/maps/Xploder_Pro-5.0.2.aamap.xml", "Lover-Boy/Advanced/Racing/Polar_Pointer-1.0.0.aamap.xml", "VOV/maps/InsanitysBrother-5.0.0.aamap.xml", "Lover-Boy/racing/RocketFire-1.0.0.aamap.xml", "Lover-Boy/racing/Fantasium-1.0.0.aamap.xml", "INW/maps/Around_The_Horn-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Vortex-0.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Start_And_Ignite-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Puzzle-0.0.1.aamap.xml", "VOV/maps/Minefield-5.1.0.aamap.xml", "Lover-Boy/racing/Dizzy-1.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Steelux-0.0.1.aamap.xml", "Blaze/maps/Road_Less_Traveled-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Cargo-1.0.0.aamap.xml", "Lover-Boy/racing/Destroyer-1.0.0.aamap.xml", "Lover-Boy/racing/BlastOff-1.0.0.aamap.xml", "Durf/maps/Butterfly-4.0.0.aamap.xml", "TestSubject/maps/DeathStar-0.2.aamap.xml", "INW/maps/Tanners_Big_Tron_Daddy-5.0.3.aamap.xml", "Lover-Boy/racing/MegaPlane-1.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Resistrator-1.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Puzzler-1.0.2.aamap.xml", "StyX/racing/River_of_Death-0.0.1.aamap.xml", "Animuson/maps/Point_Of_No_Return-5.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Martin_Boxer-1.0.3.aamap.xml", "Durf/maps/Batman-4.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Moon_Crystal-1.0.1.aamap.xml", "Lover-Boy/racing/SpaceCraft-1.0.0.aamap.xml", "Durf/maps/epo-4.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Dream_Buster-1.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Bandage-1.0.1.aamap.xml", "Animuson/maps/Death_Octagon-5.1.0.aamap.xml", "Lover-Boy/racing/Chain_of_Chaos-1.0.0.aamap.xml", "Lover-Boy/Advanced/Racing/Digimon-0.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/Catcher-1.0.0.aamap.xml", "Animuson/maps/Frizzle_Fraz-5.0.1.aamap.xml", "Lover-Boy/Advanced/Racing/TriStand-1.0.0.aamap.xml", "Smart/maps/Default-5.1.1.aamap.xml", "Lover-Boy/Advanced/Racing/Hand_of_Blood-1.0.2.aamap.xml", "Lover-Boy/Advanced/Racing/Multitude-0.0.1.aamap.xml");
+$map_counter = 0;
+$map_previous = 0;
+$map_progress = 0;
+
 $map    = "";   //  name of the current map
 $map_id = "";   //  the hash format of the current map + .txt
 $game_time = 0; //  the current game time
 
 $race_work     = false; //  flag to get the race going
+$race_pause    = false; //  flag to pause the race
 $race_done     = false; //  flag for when race is complete
 
 $first = true;      //  flag to indicate first player entered
@@ -36,11 +42,43 @@ while (!feof(STDIN))
     //  no need to process script when the line has useless information
     if ((count($part) == 0) || (count($part) == 1)) continue;
 
-    //  ROUND_STARTED [time]
-    if ($part[0] == "ROUND_STARTED")
+    //  ROUND_COMMENCING [current_round] [total_rounds]
+    if ($part[0] == "ROUND_COMMENCING")
     {
-        if (isset($records[$map_id]))
+        echo "CLEAR_LADDERLOG\n";
+        echo "ROUND_WAIT 1\n";
+
+        if ($map_counter == count($maps))
         {
+            if ($race_work && !$race_done)
+            {
+                $race_work = false;
+                $race_done = true;
+                con("0x8811ff> 0xRESETTThe race is now complete.");
+            }
+            $map_counter = 0;
+        }
+        else
+        {
+            //  store the current progress of the map rotation for the race
+            if ($race_work && !$race_done)
+            {
+                $map_progress = $map_counter;
+            }
+        }
+        echo "MAP_FILE ".trim($maps[$map_previous = $map_counter++])."\n";
+
+        echo "WAIT_FOR_EXTERNAL_SCRIPT 0\n";
+        sleep(2);
+        echo "WAIT_FOR_EXTERNAL_SCRIPT 1\n";
+    }
+    //  ROUND_STARTED [time]
+    elseif ($part[0] == "ROUND_STARTED")
+    {
+        if (isset($records[$map_id]) && (count($records[$map_id]) > 0))
+        {
+            con("0xcccc00Top ranks of racers:");
+
             for($a = 0; $a < 3; $a++)
             {
                 if (isset($records[$map_id][$a]))
@@ -51,14 +89,11 @@ while (!feof(STDIN))
             }
         }
     }
-    //  CURRENT_MAP [factor] [multiplier] [MAP_FILE]
+    //  CURRENT_MAP [factor] [multi] [MAP_FILE]
     elseif ($part[0] == "CURRENT_MAP")
     {
-        //  very handy to clear ladderlog since it does get big in a round
-        echo "CLEAR_LADDERLOG\n";
-
         //  fetch the map name from the 3rd part (if contains spaces)
-        $map = BridgeParts($part, 3);
+        $map = trim(BridgeParts($part, 3));
 
         /*
          * This process is to ensure to get the MAP_FILE only and not the appended MAP_URI like in the example:
@@ -67,6 +102,9 @@ while (!feof(STDIN))
          */
         if (false !== ($pos = strpos($map, "(")))
             $map = substr($map, 0, $pos);
+
+        $map_ext = explode("-", basename($map));
+        con("0x8811ff> 0xRESETTLoaded map: 0x00ccff".$map_ext[0]);
 
         $map_id = md5($map.".txt");
         if ($race_work && !$race_done)
@@ -80,10 +118,11 @@ while (!feof(STDIN))
             $file = fopen("./data/".$map_id.".txt", "w+");
             ftruncate($file, 0);
             fclose($file);
-
-            $map_ext = explode("-", basename($map));
-            con("0x8811ff> 0xRESETTLoaded map: 0x00ccff".$map_ext[0]);
         }
+
+        $current_map_id = md5($maps[$map_previous].".txt");
+        if ($current_map_id != $map_id)
+            con("0x8811ff> 0xff9999Loaded map 0xcccc00".$map." 0xff9999instead of 0xcccc00".$maps[$map_previous]."0xff9999.");
 
         $first = true;
         $rank = 0;
@@ -94,6 +133,50 @@ while (!feof(STDIN))
         //  reset the cycles list
         unset($cycles);
         $cycles = array();
+    }
+    //  ONLINE_PLAYERS_COUNT <humans> <ais> <humans alive> <ai alive> <humans dead> <ai dead>
+    elseif ($part[0] == "ONLINE_PLAYERS_COUNT")
+    {
+        $humans       = intval($part[1]);
+        $ais          = intval($part[2]);
+        $humans_alive = intval($part[3]);
+        $ais_alive    = intval($part[4]);
+        $humans_dead  = intval($part[5]);
+        $ais_dead     = intval($part[6]);
+
+        //  if only one human is alive, then activate the timer
+        if (($humans_alive == 1) && ((($ais_alive == 0) && ($humans > 1)) || ($race_work && !$race_done)) && !$timer_active)
+        {
+            $timer_active = true;
+        }
+        //  if all humans are dead, deactivate the timer and collapse all zones
+        elseif ($humans_alive == 0)
+        {
+            $timer_active = false;
+            echo "ROUND_WAIT 0\n";
+            echo "COLLAPSE_ALL\n";
+        }
+    }
+    //  GAME_TIME <time> (see also: GAME_TIME_INTERVAL)
+    elseif ($part[0] == "GAME_TIME")
+    {
+        $game_time = floatval(trim($part[1]));
+
+        if ($timer_active)
+        {
+            if ($timer_counter == -1)
+                $timer_counter = $timer_delay + 1;
+
+            $timer_counter--;
+            cen("0xff7777".$timer_counter."                    ");
+
+            if ($timer_counter == 0)
+            {
+                $timer_active = false;
+                echo "KILL_ALL\n";
+                echo "COLLAPSE_ALL\n";
+            }
+        }
     }
     //  CYCLE_CREATED [auth_name] [posx] [poxy] [dirx] [diry] [team_name] [time]
     elseif ($part[0] == "CYCLE_CREATED")
@@ -132,24 +215,25 @@ while (!feof(STDIN))
                 if ($cycles[$p_id][3] < $idle_warnings)
                 {
                     //  send the warnings and count it up
-                    pm($part[2], "0x8811ff> 0xff9999Idle Warning: 0xRESETTHold down your brake button (v) key to go faster.");
+                    pm($part[1], "0x8811ff> 0xff9999Idle Warning: 0xRESETTHold down your brake button (v) key to go faster.");
                     $cycles[$p_id][2] = $game_time + $idle_delay;
                     $cycles[$p_id][3] += 1;
-                    continue;
-                }
-
-                //  if the player is already actively idle, kill them
-                if ($cycles[$p_id][1])
-                {
-                    echo "KILL ".$part[1]."\n";
-                    con("0x8811ff> 0xRESETT".$part[1]." is killed for idling around!");
-                    unset($cycles[$p_id]);
                 }
                 else
                 {
-                    //  make them actively idle
-                    $cycles[$p_id][1] = true;
-                    $cycles[$p_id][2] = $game_time + $idle_delay;
+                    //  if the player is already actively idle, kill them
+                    if ($cycles[$p_id][1])
+                    {
+                        echo "KILL ".$part[1]."\n";
+                        con("0x8811ff> 0xRESETT".$part[1]." is killed for idling around!");
+                        unset($cycles[$p_id]);
+                    }
+                    else
+                    {
+                        //  make them actively idle
+                        $cycles[$p_id][1] = true;
+                        $cycles[$p_id][2] = $game_time + $idle_delay;
+                    }
                 }
             }
         }
@@ -191,6 +275,7 @@ while (!feof(STDIN))
         //  kill the user since they finished the race
         echo "KILL ".$user."\n";
         unset($cycles[$p_id]);
+        $humans_alive--;
 
         //  increase the rank of entry. Default: 0. So increase by 1 each time.
         $rank++;
@@ -204,8 +289,9 @@ while (!feof(STDIN))
             $first_player = $user;
             $first_time = $time;
 
-            //  start the timer
-            $timer_active = true;
+            //  start the timer if more than 1 human is alive
+            if ($humans_alive >= 1)
+                $timer_active = true;
         }
         //  if the user is to finish after the FIRST player has
         else
@@ -262,56 +348,64 @@ while (!feof(STDIN))
 
                 if ($race_work)
                 {
-                    pm($part[2], "The race is already active.");
+                    pm($part[2], "The race is already in-progress.");
                     continue;
                 }
 
                 echo "START_NEW_MATCH\n";
                 echo "KILL_ALL\n";
                 echo "COLLAPSE_ALL\n";
-                echo "RESET_ROTATION\n";
+
+                $map_counter = 0;   //  reset map counter for fresh start
+                $map_progress = 0;
 
                 $race_work = true;
                 $race_done = false;
+                $race_pause = false;
                 con("0x8811ff> 0xRESETTThe race will begin from next match.");
             }
-            //  Let's stop the race if it isn't done
-            elseif ($part[1] == "/stop")
+            //  Let's pause the race if it isn't done
+            elseif ($part[1] == "/pause")
             {
                 if ($race_done)
                 {
-                    pm($part[2], "Can't stop the race when it's done.");
+                    pm($part[2], "Can't pause the race when it's done.");
                     continue;
                 }
 
-                if (!$race_work)
+                if (!$race_work && $race_pause)
                 {
-                    pm($part[2], "The race is already inactive.");
+                    pm($part[2], "The race is already paused.");
                     continue;
                 }
 
                 $race_work = false;
                 $race_done = false;
-                con("0x8811ff> 0xRESETTThe race will now stop.");
+                $race_pause = true;
+                con("0x8811ff> 0xRESETTThe race is now paused.");
             }
-            //  Let's end the race so it's done
-            elseif ($part[1] == "/end")
+            //  Let's resume the race if it isn't done
+            elseif ($part[1] == "/resume")
             {
                 if ($race_done)
                 {
-                    pm($part[2], "Can't end the race when it's done.");
+                    pm($part[2], "Can't resume the race when it's done.");
                     continue;
                 }
 
-                if (!$race_work)
+                if ($race_work && !$race_pause)
                 {
-                    pm($part[2], "The race is inactive to end it.");
+                    pm($part[2], "The race is already in-progress.");
                     continue;
                 }
 
-                $race_work = false;
-                $race_done = true;
-                con("0x8811ff> 0xRESETTThe race is now done.");
+                $race_work = true;
+                $race_done = false;
+                $race_pause = false;
+
+                $map_counter = $map_progress;
+
+                con("0x8811ff> 0xRESETTThe race will not resume.");
             }
             //  Let's reset the race for fresh start
             elseif ($part[1] == "/reset")
@@ -337,12 +431,20 @@ while (!feof(STDIN))
 
                 $race_work = false;
                 $race_done = false;
+                $race_pause = false;
+
+                $map_counter = 0;
+                $map_progress = 0;
 
                 $first = true;
                 $rank = 0;
 
                 $timer_active  = false;
                 $timer_counter = -1;
+
+                echo "ROUND_WAIT 0\n";
+                echo "KILL_ALL\n";
+                echo "COLLAPSE_ALL\n";
 
                 //  reset the lists
                 unset($cycles);
@@ -363,61 +465,9 @@ while (!feof(STDIN))
 
                 con("0x8811ff> 0xRESETTThe race is now reset for a fresh start.");
             }
+            else echo "CUSTOM_PLAYER_MESSAGE ".$part[2]." chat_command_unknown ".$part[1]."\n";
         }
         else pm($part[2], 'You do not have the required access level to access "'.$part[1].'"');
-    }
-    //  ROUND_COMMENCING [current_round] [total_rounds]
-    elseif ($part[0] == "ROUND_COMMENCING")
-    {
-        echo "ROUND_WAIT 1\n";
-
-        echo "WAIT_FOR_EXTERNAL_SCRIPT 0\n";
-        sleep(1);
-        echo "WAIT_FOR_EXTERNAL_SCRIPT 1\n";
-    }
-    //  ONLINE_PLAYERS_COUNT <humans> <ais> <humans alive> <ai alive> <humans dead> <ai dead>
-    elseif ($part[0] == "ONLINE_PLAYERS_COUNT")
-    {
-        $humans       = intval($part[1]);
-        $ais          = intval($part[2]);
-        $humans_alive = intval($part[3]);
-        $ais_alive    = intval($part[4]);
-        $humans_dead  = intval($part[5]);
-        $ais_dead     = intval($part[6]);
-
-        //  if only one human is alive, then activate the timer
-        if (($humans_alive == 1) && ($ais_alive == 0) && ($humans > 1) && !$timer_active)
-        {
-            $timer_active = true;
-        }
-        //  if all humans are dead, deactivate the timer and collapse all zones
-        elseif ($humans_alive == 0)
-        {
-            $timer_active = false;
-            echo "ROUND_WAIT 0\n";
-            echo "COLLAPSE_ALL\n";
-        }
-    }
-    //  GAME_TIME <time> (see also: GAME_TIME_INTERVAL)
-    elseif ($part[0] == "GAME_TIME")
-    {
-        $game_time = floatval(trim($part[1]));
-
-        if ($timer_active)
-        {
-            if ($timer_counter == -1)
-                $timer_counter = $timer_delay + 1;
-
-            $timer_counter--;
-            cen($timer_counter."                    ");
-
-            if ($timer_counter == 0)
-            {
-                $timer_active = false;
-                echo "KILL_ALL\n";
-                echo "COLLAPSE_ALL\n";
-            }
-        }
     }
     //  ROUND_FINISHED [time]
     if ($part[0] == "ROUND_FINISHED")
@@ -430,6 +480,8 @@ while (!feof(STDIN))
                 {
                     $prev_index = $a - 1;
                     $next_index = $a + 1;
+
+                    pm($records[$map_id][$a][0], "0x0099ffYour relative position:");
 
                     //  show the previous rank (if it exists)
                     if (isset($records[$map_id][$prev_index]))
