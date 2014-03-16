@@ -9,14 +9,18 @@ $map    = "";   //  name of the current map
 $map_id = "";   //  the hash format of the current map + .txt
 $game_time = 0; //  the current game time
 
-$race_work     = false; //  flag to get the race going
-$race_pause    = false; //  flag to pause the race
-$race_done     = false; //  flag for when race is complete
+//  set the race start and finish time to week
+$race_start_time  = strtotime("+1 week");
+$race_finish_time = strtotime("+2 week");
+
+$race_work  = false; //  flag to get the race going
+$race_pause = false; //  flag to pause the race
+$race_done  = false; //  flag for when race is complete
 
 $first = true;      //  flag to indicate first player entered
 $first_player = ""; //  the name of the first player
 $first_time = 0;    //  the finished time of the first player
-$rank = 0;          //  rank counter for each entered player
+$finish_place = 0;  //  rank counter for each entered player
 
 $timer_active  = false; //  flag for running the delay timer
 $timer_delay   = 100;   //  amount of seconds to delay before ending round (kill all players)
@@ -39,34 +43,58 @@ while (!feof(STDIN))
     $line = rtrim(fgets(STDIN, 1024));
     $part = explode(" ", $line);
 
-    //  no need to process script when the line has useless information
-    if ((count($part) == 0) || (count($part) == 1)) continue;
-
     //  ROUND_COMMENCING [current_round] [total_rounds]
     if ($part[0] == "ROUND_COMMENCING")
     {
+        //  time for the race to start
+        if ((time() >= $race_start_time) && !$race_work &&!$race_done)
+        {
+            echo "START_NEW_MATCH\n";
+            echo "KILL_ALL\n";
+            echo "COLLAPSE_ALL\n";
+            echo "ROUND_WAIT 0\n";
+
+            $map_counter = 0;   //  reset map counter for fresh start
+            $map_progress = 0;
+
+            if (isset($records[$map_id]))
+                unset($records[$map_id]);
+            $records[$map_id] = array();
+
+            $race_work = true;
+            $race_done = false;
+            $race_pause = false;
+            con("0xffff00> 0xRESETTThe race will begin from next match.");
+        }
+
+        //  time for the race to finish
+        if ((time() >= $race_finish_time) && $race_work && !$race_done)
+        {
+            $race_work = false;
+            $race_done = true;
+            $race_pause = false;
+
+            con("0xffff00> 0xRESETTThe race is now finished.");
+        }
+
         echo "CLEAR_LADDERLOG\n";
         echo "ROUND_WAIT 1\n";
 
         if ($map_counter == count($maps))
         {
-            if ($race_work && !$race_done)
-            {
-                $race_work = false;
-                $race_done = true;
-                con("0x8811ff> 0xRESETTThe race is now complete.");
-            }
             $map_counter = 0;
         }
         else
         {
             //  store the current progress of the map rotation for the race
-            if ($race_work && !$race_done)
+            if ($race_work && !$race_done && !$race_pause)
             {
                 $map_progress = $map_counter;
             }
         }
         echo "MAP_FILE ".trim($maps[$map_previous = $map_counter++])."\n";
+
+        SaveMapRecords($map_id, $records[$map_id]);
 
         echo "WAIT_FOR_EXTERNAL_SCRIPT 0\n";
         sleep(2);
@@ -104,28 +132,16 @@ while (!feof(STDIN))
             $map = substr($map, 0, $pos);
 
         $map_ext = explode("-", basename($map));
-        con("0x8811ff> 0xRESETTLoaded map: 0x00ccff".$map_ext[0]);
+        con("0xffff00> 0xRESETTLoaded map: 0x00ccff".$map_ext[0]);
 
         $map_id = md5($map.".txt");
-        if ($race_work && !$race_done)
-        {
-            //  reset records for new entries
-            if (isset($records[$map_id]))
-                unset($records[$map_id]);
-            $records[$map_id] = array();
-
-            //  reset the file for fresh entries
-            $file = fopen("./data/".$map_id.".txt", "w+");
-            ftruncate($file, 0);
-            fclose($file);
-        }
 
         $current_map_id = md5($maps[$map_previous].".txt");
         if ($current_map_id != $map_id)
-            con("0x8811ff> 0xff9999Loaded map 0xcccc00".$map." 0xff9999instead of 0xcccc00".$maps[$map_previous]."0xff9999.");
+            con("0xffff00> 0xff9999Loaded map 0xcccc00".$map." 0xff9999instead of 0xcccc00".$maps[$map_previous]."0xff9999.");
 
         $first = true;
-        $rank = 0;
+        $finish_place = 0;
 
         $timer_active  = false;
         $timer_counter = -1;
@@ -215,7 +231,7 @@ while (!feof(STDIN))
                 if ($cycles[$p_id][3] < $idle_warnings)
                 {
                     //  send the warnings and count it up
-                    pm($part[1], "0x8811ff> 0xff9999Idle Warning: 0xRESETTHold down your brake button (v) key to go faster.");
+                    pm($part[1], "0xffff00> 0xff9999Idle Warning: 0xRESETTHold down your brake button (v) key to go faster.");
                     $cycles[$p_id][2] = $game_time + $idle_delay;
                     $cycles[$p_id][3] += 1;
                 }
@@ -225,7 +241,7 @@ while (!feof(STDIN))
                     if ($cycles[$p_id][1])
                     {
                         echo "KILL ".$part[1]."\n";
-                        con("0x8811ff> 0xRESETT".$part[1]." is killed for idling around!");
+                        con("0xffff00> 0xRESETT".$part[1]." is killed for idling around!");
                         unset($cycles[$p_id]);
                     }
                     else
@@ -275,27 +291,14 @@ while (!feof(STDIN))
         //  kill the user since they finished the race
         echo "KILL ".$user."\n";
         unset($cycles[$p_id]);
-        $humans_alive--;
 
         //  increase the rank of entry. Default: 0. So increase by 1 each time.
-        $rank++;
+        $finish_place++;
 
-        //  if the user is the first to finish
-        if ($first)
-        {
-            con($rank.") 0x9955ff".$user." 0xffff44finished in 0x88ff33".$time." seconds0xffff44.");
-
-            $first = false;
-            $first_player = $user;
-            $first_time = $time;
-
-            //  start the timer if more than 1 human is alive
-            if ($humans_alive >= 1)
-                $timer_active = true;
-        }
-        //  if the user is to finish after the FIRST player has
-        else
-            con($rank.") 0x9955ff".$user." 0xffff44finished in 0x88ff33".$time." seconds 0x92aba0(0x00aa11".($time - $first_time)." 0xffaa00seconds behind 0xff77ff".$first_player." 0x92aba0).");
+        $racer_time_changed = false;
+        $racer_old_time = 0;
+        $racer_old_rank = 0;
+        $new_racer = false;
 
         //  if the player already exists within the records
         if ($found)
@@ -303,15 +306,16 @@ while (!feof(STDIN))
             //  if their current time is better than their first race
             if ($records[$map_id][$found_id][1] < $time)
             {
-                //  tell the player how much faster they were
-                pm($user, " 0x00ccffYou are ".($time - $records[$map_id][$found_id][1])."s faster from your first race.");
+                $racer_time_changed = true;
+                $racer_old_time = $records[$map_id][$found_id][1];
+                $racer_old_rank = $found_id + 1;
+
+                //  update the time
+                $records[$map_id][$found_id][1] = $time;
             }
-            //  if their current time is worse than their first race
-            elseif ($records[$map_id][$found_id][1] > $time)
-            {
-                //  tell the player how much slower they were
-                pm($user, " 0x00ccffYou are ".($time - $records[$map_id][$found_id][1])."s slower from your first race.");
-            }
+
+            //  increase the times finished counter
+            $records[$map_id][$found_id][2] += 1;
         }
         else
         {
@@ -319,53 +323,67 @@ while (!feof(STDIN))
             if (!isset($records[$map_id]))
                 $records[$map_id] = array();
 
-            //  add the player's user and time into the map record (finish based)
-            $records[$map_id][] = array($user, $time);
+            //                          user, time, times_finished, can_save?
+            $records[$map_id][] = array($user, $time, 1,            $race_work);
 
-            //  if the race is working and not done yet, append their name and time to the file
-            if ($race_work && !$race_done)
-            {
-                file_put_contents("./data/".$map_id.".txt", $user." ".$time."\n", FILE_APPEND);
-            }
+            $new_racer = true;
         }
 
         //  sort the ranks by their times (shortest to longest)
-        sort($records[$map_id]);
+        usort($records[$map_id], "CompareRecords");
+
+        if ($racer_time_changed)
+        {
+            //  check if the sorting chose this player as the best (rank 1)
+            if ($records[$map_id][0][0] == $user)
+            {
+                $map_ext = explode("-", basename($map));
+                con("0xffff00*0x88ff22*0x00ccff*0xff3300* 0xffcc55Congratulations 0x00ccff".$user."0xffcc55! They now hold the best time for 0x55cc99".$map_ext[0]."0xffcc55! 0xff3300*0x00ccff*0x88ff22*0xffff00*");
+            }
+            else
+            {
+                //  check for user existence in the records and their id
+                for ($r_id = 0; $r_id < count($records[$map_id]); $r_id++)
+                {
+                    if ($records[$map_id][$r_id][0] == $user)
+                    {
+                        if ($new_racer)
+                        {
+                            con("0xff8800".$finish_place.") 0x55cc99".$user." 0x44ccfffinished in 0xaacc88".$time."s 0x44ccffand is placed in rank 0xcccccc".($r_id + 1)."0x44ccff.");
+                        }
+                        else
+                        {
+                            con("0xff8800".$finish_place.") 0x55cc99".$user." 0x44ccfffinished in 0xaacc88".$time."s 0xcccc7c(0xcccc34".($time - $racer_old_time)."s faster 0xcccc7c) 0x44ccffand ".(($racer_old_rank == $r_id + 1) ? "stayed at" : "rose to")." rank 0xcccccc".($r_id + 1)."0x44ccff.");
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            con("0xff8800".$finish_place.") 0x55cc99".$user." 0x44ccfffinished in 0xaacc88".$time."s 0xcccc7c(0xccff88".($time - $racer_old_time)."s slower 0xcccc7c) 0x44ccffand stayed at rank 0xcccccc".($found_id + 1)."0x44ccff.");
+        }
+
+        //  if the user is the first to finish
+        if ($first)
+        {
+            $first = false;
+            $first_player = $user;
+            $first_time = $time;
+
+            //  start the timer if more than one human is alive
+            if ($humans_alive > 1)
+                $timer_active = true;
+        }
     }
     //  INVALID_COMMAND [command] [player_username] [ip_address] [access_level] [params] ...
     elseif ($part[0] == "INVALID_COMMAND")
     {
         if ($part[4] <= 1)  //  allow only officers and lower level users
         {
-            //  Let's start the race if it isn't done
-            if ($part[1] == "/start")
-            {
-                if ($race_done)
-                {
-                    pm($part[2], "Can't start the race when it's done.");
-                    continue;
-                }
-
-                if ($race_work)
-                {
-                    pm($part[2], "The race is already in-progress.");
-                    continue;
-                }
-
-                echo "START_NEW_MATCH\n";
-                echo "KILL_ALL\n";
-                echo "COLLAPSE_ALL\n";
-
-                $map_counter = 0;   //  reset map counter for fresh start
-                $map_progress = 0;
-
-                $race_work = true;
-                $race_done = false;
-                $race_pause = false;
-                con("0x8811ff> 0xRESETTThe race will begin from next match.");
-            }
             //  Let's pause the race if it isn't done
-            elseif ($part[1] == "/pause")
+            if ($part[1] == "/pause")
             {
                 if ($race_done)
                 {
@@ -373,16 +391,21 @@ while (!feof(STDIN))
                     continue;
                 }
 
-                if (!$race_work && $race_pause)
+                if ($race_pause)
                 {
                     pm($part[2], "The race is already paused.");
+                    continue;
+                }
+                elseif (!$race_work)
+                {
+                    pm($part[2], "The race is needs to be active to pause it.");
                     continue;
                 }
 
                 $race_work = false;
                 $race_done = false;
                 $race_pause = true;
-                con("0x8811ff> 0xRESETTThe race is now paused.");
+                con("0xffff00> 0xRESETTThe race is now paused.");
             }
             //  Let's resume the race if it isn't done
             elseif ($part[1] == "/resume")
@@ -393,7 +416,7 @@ while (!feof(STDIN))
                     continue;
                 }
 
-                if ($race_work && !$race_pause)
+                if (!$race_pause)
                 {
                     pm($part[2], "The race is already in-progress.");
                     continue;
@@ -405,7 +428,7 @@ while (!feof(STDIN))
 
                 $map_counter = $map_progress;
 
-                con("0x8811ff> 0xRESETTThe race will not resume.");
+                con("0xffff00> 0xRESETTThe race will now resume.");
             }
             //  Let's reset the race for fresh start
             elseif ($part[1] == "/reset")
@@ -463,7 +486,7 @@ while (!feof(STDIN))
                     }
                 }
 
-                con("0x8811ff> 0xRESETTThe race is now reset for a fresh start.");
+                con("0xffff00> 0xRESETTThe race is now reset for a fresh start.");
             }
             else echo "CUSTOM_PLAYER_MESSAGE ".$part[2]." chat_command_unknown ".$part[1]."\n";
         }
@@ -534,5 +557,53 @@ function BridgeParts($parts, $x, $separator = " ", $end_with = "")
     }
 
     return $ret;
+}
+
+function CompareRecords($a, $b)
+{
+    if ($a[1] == $b[1])
+        return 0;
+    else
+        return ($a[1] < $b[1]) ? -1 : 1;
+}
+
+function SaveRecords($map_id = null)
+{
+    global $maps, $records;
+
+    if (isset($map_id) && isset($records[$map_id]))
+    {
+        SaveMapRecords($map_id, $records[$map_id]);
+    }
+    else
+    {
+        if (count($records) > 0)
+        {
+            foreach ($records as $map)
+                SaveMapRecords($map, $records[$map]);
+        }
+    }
+}
+
+function SaveMapRecords($map_id, $records)
+{
+    global $maps;
+
+    $map_file = "";
+    foreach ($maps as $map)
+        if (md5($map.".txt") == $map_id)
+            $map_file = $map;
+    con("0xffff00> 0xRESETTSaving records of ".$map_file." to file...");
+
+    $f_res = fopen("./data/".$map_id.".txt", "w+");
+    for ($r_id = 0; $r_id < count($records); $r_id++)
+    {
+        //  don't save records that aren't done during the race
+        if (!$records[$r_id][3]) continue;
+
+        //                  username               time                finished times
+        fwrite($f_res, $records[$r_id][0]." ".$records[$r_id][1]." ".$records[$r_id][2]."\n");
+    }
+    fclose($f_res);
 }
 ?>

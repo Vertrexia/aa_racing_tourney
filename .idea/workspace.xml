@@ -26,7 +26,7 @@
       <file leaf-file-name="script.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="360" column="0" selection-start="17719" selection-end="17719" vertical-scroll-proportion="0.17307693" vertical-offset="5967" max-vertical-offset="9248">
+            <state line="366" column="0" selection-start="18048" selection-end="18048" vertical-scroll-proportion="0.46153846" vertical-offset="5814" max-vertical-offset="10455">
               <folding />
             </state>
           </provider>
@@ -35,7 +35,7 @@
       <file leaf-file-name="racing.cfg" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/racing.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="312" column="0" selection-start="14306" selection-end="14306" vertical-scroll-proportion="0.0" vertical-offset="4428" max-vertical-offset="10370">
+            <state line="312" column="0" selection-start="14306" selection-end="14306" vertical-scroll-proportion="0.0" vertical-offset="5304" max-vertical-offset="10370">
               <folding />
             </state>
           </provider>
@@ -130,7 +130,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../scripts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../aa_kill_the_king" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistory" value="" />
@@ -511,11 +511,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/language/custom.txt">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="17" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.42967033" vertical-offset="612" max-vertical-offset="4216" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_9.php">
@@ -541,18 +541,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/racing.cfg">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="312" column="0" selection-start="14306" selection-end="14306" vertical-scroll-proportion="0.0" vertical-offset="4428" max-vertical-offset="10370">
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="360" column="0" selection-start="17719" selection-end="17719" vertical-scroll-proportion="0.17307693" vertical-offset="5967" max-vertical-offset="9248">
+        <state line="366" column="0" selection-start="18048" selection-end="18048" vertical-scroll-proportion="0.46153846" vertical-offset="5814" max-vertical-offset="10455">
           <folding />
         </state>
       </provider>
